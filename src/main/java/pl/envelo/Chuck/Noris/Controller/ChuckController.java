@@ -18,13 +18,14 @@ public class ChuckController {
 
     private final String NO_JOKES = "THERE IS NO CONTENT IN CHUCK NORRIS API JOKE";
     private final String BAD_JSON_PROCESSING = "CAN'T CONVERT JSON TO POJO";
+
     @Autowired
     ChuckService service;
 
     @GetMapping(value = "/random")
     public String getRandomJoke(Model model) {
         try {
-            String joke = service.Joke();
+            String joke = service.Joke(true);
             model.addAttribute("joke", joke);
             return "joke";
         } catch (JsonProcessingException e) {
@@ -39,7 +40,7 @@ public class ChuckController {
 
     @GetMapping(value = "/view")
     public String getAllJokes(Model model) {
-        model.addAttribute("jokes",service.allJokes());
+        model.addAttribute("jokes", service.allJokes());
         return "jokes";
     }
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Chuck Norris Jokes</title>
+</head>
+<body>
+<table>
+  <thead>
+  <tr>
+    <th> Joke </th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:if="${managers.empty}">
+    <td colspan="2"> No Managers Available </td>
+  </tr>
+  <tr th:each="manager : ${managers}">
+    <td><span th:text="${manager.id}"> ID:  </span></td>
+    <tr th:if="${manager.allJokes.empty}">
+      <td colspan="2">No Jokes Available</td>
+    </tr>
+    <tr th:each="joke: ${manager.allJokes}">
+      <td><span th:text="${joke.jokeId}"> ID:  </span></td>
+      <td><span th:text="${joke.value}"> Joke:  </span></td>
+    </tr>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

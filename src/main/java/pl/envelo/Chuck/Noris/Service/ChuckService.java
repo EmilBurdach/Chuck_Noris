@@ -24,12 +24,12 @@ public class ChuckService {
     private final ObjectMapper mapper = new ObjectMapper();
     private Request request;
 
-    public String Joke() throws IOException {
-        request = new Request.Builder().url(JOKE_URL).get().build();
+    public String Joke(boolean save) throws IOException {
+        request = new Request.Builder().url(JOKE_URL).get().addHeader("accept", "application/json").build();
         try (Response response = client.newCall(request).execute()) {
             String responseBody = response.body().string();
             Joke joke = convertJsonToJoke(responseBody);
-            jokeRepository.save(joke);
+            if(save) jokeRepository.save(joke);
             return joke.getValue();
         }
     }
